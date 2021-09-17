@@ -54,8 +54,7 @@ void UDoorInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 			if (PlayerPawn && TriggerBox->IsOverlappingActor(PlayerPawn))
 			{
 				CurrentRotationTime += DeltaTime;
-				const float TimeRatio = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
-				const float RotationAlpha = OpenCurve.GetRichCurveConst()->Eval(TimeRatio);
+				const float RotationAlpha = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
 				const FRotator CurrentRotation = FMath::Lerp(StartRotation, FinalRotation, RotationAlpha);
 				GetOwner()->SetActorRotation(CurrentRotation);
 			}
@@ -63,10 +62,8 @@ void UDoorInteractionComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 			if (PlayerPawn && TriggerBoxBack->IsOverlappingActor(PlayerPawn))
 			{
 				CurrentRotationTime += DeltaTime;
-				const float TimeRatio = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
-				const float RotationAlpha = OpenCurve.GetRichCurveConst()->Eval(TimeRatio);
+				const float RotationAlpha = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
 				const FRotator CurrentRotation = FMath::Lerp(StartRotation, FinalRotation*-1, RotationAlpha);
-				
 				GetOwner()->SetActorRotation(CurrentRotation);
 			}
 		}
